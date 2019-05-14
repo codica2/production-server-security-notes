@@ -28,6 +28,7 @@ You can generate key on your device run ` ssh-keygen -t rsa -b 4096 -C "your_ema
    
    For disable root login you must uncomment `#PermitRootLogin no` in 
    file `/etc/ssh/sshd_config` then restart ssh server run `systemctl restart sshd.service`
+
 **4. Change default port for ssh:**
     
    In file `/etc/ssh/sshd_config` change string `Port 22` to `Port 1001`. 
