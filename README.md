@@ -44,7 +44,7 @@ You can generate key on your device run ` ssh-keygen -t rsa -b 4096 -C "your_ema
 **5. Regular install security updates**
 
    Run command on server `apt unattended-upgrade`
-   More details follow link
+   More details follow [link](https://help.ubuntu.com/community/AutomaticSecurityUpdates) 
 
 **6. For security your web-site - use ssl certificates:**
     
