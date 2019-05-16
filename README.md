@@ -33,7 +33,11 @@ If you want to generate the key on your device, just run: `ssh-keygen -t rsa -b 
    Copy your key on server and run: `ssh-copy-id -i ~/.ssh/id_rsa user@yourhost`
 
 **3. Disable SSH root login:**
+
+   With a good password, you can limit your exposure to a brute force attack. However, it may still be possible. Before you disable root logins you should add an administrative user that can ssh into the server and become root with su.
    
+   This adds another layer of security because an additional username and password must now be entered before gaining the root user privileges.
+
    In order to disable root login, you need to uncomment `#PermitRootLogin no` in 
    file `/etc/ssh/sshd_config. After, you need to restart SSH server and run `systemctl restart sshd.service`
 
@@ -48,7 +52,9 @@ If you want to generate the key on your device, just run: `ssh-keygen -t rsa -b 
  Check the following [link](https://help.ubuntu.com/community/AutomaticSecurityUpdates) for more details.
 
 **6. Use SSL certificates to secure your website:**
-    
+
+   SSL Certificates are small data files that digitally bind a cryptographic key to an organization’s details. When installed on a web server, it activates the padlock and the https protocol and allows secure connections from a web server to a browser. Typically, SSL is used to secure credit card transactions, data transfer and logins, and more recently is becoming the norm when securing browsing of social media sites.
+
    For example, you can use [letsencrypt](https://letsencrypt.org/) - free certificate provider. 
 
 **7. Use fail2ban utility**
@@ -67,3 +73,4 @@ Copyright © 2015-2019 Codica. It is released under the [MIT License](https://op
 The names and logos for Codica are trademarks of Codica.
 
 We love open source software! See [our other projects](https://github.com/codica2) or [hire us](https://www.codica.com/) to design, develop, and grow your product.
+
