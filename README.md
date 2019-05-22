@@ -1,10 +1,10 @@
- <h1 align="center"> Production server security notes </h>
+# Production server security notes
+
+Server security is an important part of the production. Here we provide 7 tips to secure your servers
 
 ![Secure](secure.jpg?raw=true )
 
-##  Server security is an important part of the production. Here we provide 7 tips to secure your servers
-
-### 1. Use strong passwords.
+## 1. Use strong passwords.
 
 A comprehensive password is:
 
@@ -21,15 +21,15 @@ at least 8 characters long;
 
 * Not quickly identifiable by any program (i.e. less than one week).
 
-#### Password examples:
+### Password examples:
 
-<span style="color:red">Bad password:</span> **qwerty123**
+**Bad password:** `qwerty123`
 
-<span style="color:green">Good password:</span> **u6]T:PX.OT8!VEB;**
+**Good password:** `u6]T:PX.OT8!VEB;`
 
 You can generate a comprehensive password using [generator](https://passwordsgenerator.net/)
 
-### 2. Connect to server via SSH key and disable authorization via password.
+## 2. Connect to server via SSH key and disable authorization via password.
 
 If you want to generate the key on your device, just run:
 
@@ -43,7 +43,7 @@ Copy your key on server and run:
 ssh-copy-id -i ~/.ssh/id_rsa user@yourhost
 ```
 
-### 3. Disable SSH root login.
+## 3. Disable SSH root login.
 
 With a good password, you can limit your exposure to a brute force attack. However, it may still be possible. Before you disable root logins you should add an administrative user that can ssh into the server and become root with su.
 
@@ -51,21 +51,21 @@ This adds another layer of security because an additional username and password 
 
 In order to disable root login, you need to uncomment `#PermitRootLogin no` in file `/etc/ssh/sshd_config`. After, you need to restart SSH server and run `systemctl restart sshd.service`.
 
-### 4. Change default port for SSH.
+## 4. Change default port for SSH.
 
 In file `/etc/ssh/sshd_config` change the string `Port 22` to `Port 1001`. Then restart SSH server via `systemctl restart sshd.service`. Now you can connect to the server using `1001` port.
 
-### 5. Regularly install security updates.
+## 5. Regularly install security updates.
 
 Run command `apt unattended-upgrade` on the server. Check the following [link](https://help.ubuntu.com/community/AutomaticSecurityUpdates) for more details.
 
-### 6. Use SSL certificates to secure your website.
+## 6. Use SSL certificates to secure your website.
 
 SSL Certificates are small data files that digitally bind a cryptographic key to an organization’s details. When installed on a web server, it activates the padlock and the https protocol and allows secure connections from a web server to a browser. Typically, SSL is used to secure credit card transactions, data transfer and logins, and more recently is becoming the norm when securing browsing of social media sites.
 
 For example, you can use [letsencrypt](https://letsencrypt.org/) - free certificate provider.
 
-### 7. Use fail2ban utility.
+## 7. Use fail2ban utility.
 
 [Fail2ban](http://www.fail2ban.org/wiki/index.php/Main_Page) scans log files (e.g. `/var/log/apache/error_log`) and bans IPs that show any malicious signs: too many password failures, seeking for exploits, etc.
 
