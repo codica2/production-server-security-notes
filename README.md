@@ -3,7 +3,9 @@
 ![Secure](secure.jpg?raw=true )
 
 ##  Server security is an important part of the production. Here we provide 7 tips to secure your servers
-### **1. Use strong passwords.**
+
+### 1. Use strong passwords.
+
 A comprehensive password is:
 
 * Private: it is used and known by one person only;
@@ -19,50 +21,57 @@ at least 8 characters long;
 
 * Not quickly identifiable by any program (i.e. less than one week).
 
- #### Password examples:  
- 
-  <span style="color:red">Bad password:</span>  **qwerty123**  
-  <span style="color:green">Good password:</span> **u6]T:PX.OT8!VEB;**
-  
-  You can generate a comprehensive password using [generator](https://passwordsgenerator.net/)
+#### Password examples:
 
+<span style="color:red">Bad password:</span> **qwerty123**
 
-### **2. Connect to server via SSH key and disable authorization via password:** 
+<span style="color:green">Good password:</span> **u6]T:PX.OT8!VEB;**
 
-If you want to generate the key on your device, just run: `ssh-keygen -t rsa -b 4096 -C "your_email@example.com"`
-   Copy your key on server and run: `ssh-copy-id -i ~/.ssh/id_rsa user@yourhost`
+You can generate a comprehensive password using [generator](https://passwordsgenerator.net/)
 
-### **3. Disable SSH root login:**
+### 2. Connect to server via SSH key and disable authorization via password.
 
-   With a good password, you can limit your exposure to a brute force attack. However, it may still be possible. Before you disable root logins you should add an administrative user that can ssh into the server and become root with su.
-   
-   This adds another layer of security because an additional username and password must now be entered before gaining the root user privileges.
+If you want to generate the key on your device, just run:
 
-   In order to disable root login, you need to uncomment `#PermitRootLogin no` in 
-   file `/etc/ssh/sshd_config. After, you need to restart SSH server and run `systemctl restart sshd.service`
+```bash
+ssh-keygen -t rsa -b 4096 -C "your_email@example.com"
+```
 
-### **4. Change default port for SSH:**
-    
-   In file `/etc/ssh/sshd_config` change the string `Port 22` to `Port 1001`. 
-   Then restart SSH server via `systemctl restart sshd.service`. Now you can connect to the server using `1001` port
+Copy your key on server and run:
 
-### **5. Regularly install security updates**
+```bash
+ssh-copy-id -i ~/.ssh/id_rsa user@yourhost
+```
 
-   Run command `apt unattended-upgrade` on the server.
- Check the following [link](https://help.ubuntu.com/community/AutomaticSecurityUpdates) for more details.
+### 3. Disable SSH root login.
 
-### **6. Use SSL certificates to secure your website:**
+With a good password, you can limit your exposure to a brute force attack. However, it may still be possible. Before you disable root logins you should add an administrative user that can ssh into the server and become root with su.
 
-   SSL Certificates are small data files that digitally bind a cryptographic key to an organization’s details. When installed on a web server, it activates the padlock and the https protocol and allows secure connections from a web server to a browser. Typically, SSL is used to secure credit card transactions, data transfer and logins, and more recently is becoming the norm when securing browsing of social media sites.
+This adds another layer of security because an additional username and password must now be entered before gaining the root user privileges.
 
-   For example, you can use [letsencrypt](https://letsencrypt.org/) - free certificate provider. 
+In order to disable root login, you need to uncomment `#PermitRootLogin no` in file `/etc/ssh/sshd_config`. After, you need to restart SSH server and run `systemctl restart sshd.service`.
 
-### **7. Use fail2ban utility**
+### 4. Change default port for SSH.
 
-[Fail2ban](http://www.fail2ban.org/wiki/index.php/Main_Page) scans log files (e.g. `/var/log/apache/error_log`) and bans IPs that show any malicious signs: too many password failures, seeking for exploits, etc. 
+In file `/etc/ssh/sshd_config` change the string `Port 22` to `Port 1001`. Then restart SSH server via `systemctl restart sshd.service`. Now you can connect to the server using `1001` port.
+
+### 5. Regularly install security updates.
+
+Run command `apt unattended-upgrade` on the server. Check the following [link](https://help.ubuntu.com/community/AutomaticSecurityUpdates) for more details.
+
+### 6. Use SSL certificates to secure your website.
+
+SSL Certificates are small data files that digitally bind a cryptographic key to an organization’s details. When installed on a web server, it activates the padlock and the https protocol and allows secure connections from a web server to a browser. Typically, SSL is used to secure credit card transactions, data transfer and logins, and more recently is becoming the norm when securing browsing of social media sites.
+
+For example, you can use [letsencrypt](https://letsencrypt.org/) - free certificate provider.
+
+### 7. Use fail2ban utility.
+
+[Fail2ban](http://www.fail2ban.org/wiki/index.php/Main_Page) scans log files (e.g. `/var/log/apache/error_log`) and bans IPs that show any malicious signs: too many password failures, seeking for exploits, etc.
 
 Generally Fail2Ban is used to update firewall rules to reject the IP addresses for a specified amount of time. Although any other arbitrary action (e.g. sending an email) could also be configured. Fail2Ban comes with filters for various services (apache, courier, ssh, etc) out of the box.
 ___
+
 ### License
 Copyright © 2015-2019 Codica. It is released under the [MIT License](https://opensource.org/licenses/MIT).
 
